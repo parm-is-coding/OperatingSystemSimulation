@@ -30,6 +30,7 @@ typedef struct {
 }Semaphore;
 
 
+
 int main(){
     printf("Hello World\n");
     //Setting up InitProcess
@@ -43,9 +44,9 @@ int main(){
     bool initProcessIsAlive = true;
     while(initProcessIsAlive){
     //runRunningProcess(pAllProcesses);
-    char* command;
-    //     printf("Enter a command: ");
-    //     scanf("%c",command);
+    char command;
+    printf("Enter a command: ");
+    scanf("%c",&command);
     printf("Run Simulaton");     
     initProcessIsAlive = false;
 
