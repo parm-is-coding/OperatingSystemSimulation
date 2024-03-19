@@ -4,6 +4,8 @@
 #include "list.h"
 #include "helpers.h"
 
+#include "scheduler.c"
+
 // global Variables
 bool initProcessIsAlive;
 ProcessControlBlock initProcess;
@@ -38,7 +40,7 @@ void runRunningProcess(ProcessControlBlock* test){
     printf("Running Process ID:%d\n",pRunningProcess->PID);
 }
 
-void createInitProcess () {
+void createInitProcess() {
     initProcess->PID = 0;
     initProcess->priority = initP;
     initProcess->state = Running;
@@ -48,14 +50,6 @@ void createInitProcess () {
 
 //set up
 //while (initProcessIsAlive)
-    //run 1 iteration of our cpu
-        //case: if empty -> do nothing
-        //choose our priority queue
-        //current++
-        //current.time -= quantum
-        //if current.time == 0
-            //kill current
-                //list.pop current (frees)
     //execute a command from user
         //switch statement -> function
             //exit: kills current process
@@ -63,10 +57,20 @@ void createInitProcess () {
                     //case: process time quantum was finished last round
                 //case: if queues are empty
                     //kill initProcess -> initProcessIsAlive = false
+            //q: runs a process
+                //run 1 iteration of our cpu
+                //case: if empty -> do nothing
+                //choose our priority queue
+                //current++
+                //current.time -= quantum
+                //if current.time == 0
+                    //kill current
+                        //list.pop current (frees)
+
 //done
 
 
-int main(){
+int main() {
     createInitProcess();
 
     List* pAllProcesses = List_create(); //temporary
@@ -75,15 +79,61 @@ int main(){
     char command;
 
     while(initProcessIsAlive){
-    runRunningProcess(&initProcess); //temporary
-    
-    printf("Enter a command: ");
-    scanf("%c",&command);
-    printf("Run Simulaton");     
-
-    //the commands are qued up and run as the user enters the Q command
+        runProcess(); //scheduler chooses and runs a process, if empty -> do nothing
+        
+        //get user command
+        printf("Enter a command: ");
+        scanf("%c",&command);
+        
+        runCommand(&command);
     }
 
     printf("Simulation is Over");
     return 0;
+}
+
+void commands(char* command) {
+    switch (*command) {
+        case 'C':
+            Create();
+            break;
+        case 'F':
+            Fork();
+            break;
+        case 'K':
+            Kill();
+            break;
+        case 'E':
+            Exit();
+            break;
+        case 'Q':
+            Quantum();
+            break;
+        case 'S':
+            Send();
+            break;
+        case 'R':
+            Receive();
+            break;
+        case 'Y':
+            Reply();
+            break;
+        case 'N':
+            New_Sem();
+            break;
+        case 'P':
+            Sem_P();
+            break;
+        case 'V':
+            Sem_V();
+            break;
+        case 'I':
+            Proc_Info();
+            break;
+        case 'T':
+            Total_Info();
+            break;
+        default: //invalid command
+            printf("comand not recognized, please try again\n");
+    }
 }
