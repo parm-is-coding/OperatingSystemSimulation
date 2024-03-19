@@ -6,10 +6,12 @@
 
 // global Variables
 bool initProcessIsAlive;
+ProcessControlBlock initProcess;
 
 
 typedef struct {
     int PID;
+    int time;
     enum State {
         Ready,
         Running,
@@ -36,28 +38,53 @@ void runRunningProcess(ProcessControlBlock* test){
     ProcessControlBlock* pRunningProcess = test;
     printf("Running Process ID:%d\n",pRunningProcess->PID);
 }
-int main(){
-    printf("Hello World\n");
-    //Setting up InitProcess
-    ProcessControlBlock initProcess;
-    initProcess.PID = 0;
-    initProcess.priority = initP;
-    initProcess.state = Running;
 
-    List* pAllProcesses = List_create();
+void createInitProcess (ProcessControlBlock* initProcess) {
+    initProcess->PID = 0;
+    initProcess->priority = initP;
+    initProcess->state = Running;
+    initProcessIsAlive = true;
+}
+
+
+//set up
+//while (initProcessIsAlive)
+    //run 1 iteration of our cpu
+        //case: if empty -> do nothing
+        //choose our priority queue
+        //current++
+        //current.time -= quantum
+        //if current.time == 0
+            //kill current
+                //list.pop current (frees)
+    //execute a command from user
+        //switch statement -> function
+            //exit: kills current process
+                //know the current queue, the current process in that queue
+                    //case: process time quantum was finished last round
+                //case: if queues are empty
+                    //kill initProcess -> initProcessIsAlive = false
+//done
+
+
+int main(){
+    createInitProcess();
+
+    List* pAllProcesses = List_create(); //temporary
     List_append(pAllProcesses,&initProcess);
-    bool initProcessIsAlive = true;
-    while(initProcessIsAlive){
-    runRunningProcess(&initProcess);
+
     char command;
+
+    while(initProcessIsAlive){
+    runRunningProcess(&initProcess); //temporary
+    
     printf("Enter a command: ");
     scanf("%c",&command);
     printf("Run Simulaton");     
-    initProcessIsAlive = false;
-
 
     //the commands are qued up and run as the user enters the Q command
     }
+    
     printf("Simulation is Over");
     return 0;
 }
