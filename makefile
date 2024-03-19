@@ -1,6 +1,6 @@
 all:
 
 build:	
-	gcc main.c -o simulation
+	gcc main.c list.o -o simulation
 run: build
 	./simulation
