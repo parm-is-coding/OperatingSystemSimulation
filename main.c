@@ -30,7 +30,12 @@ typedef struct {
 }Semaphore;
 
 
-
+void runRunningProcess(ProcessControlBlock* test){
+    //iterate over the list of all processes return the address
+    //of the PCB that is in the running state
+    ProcessControlBlock* pRunningProcess = test;
+    printf("Running Process ID:%d\n",pRunningProcess->PID);
+}
 int main(){
     printf("Hello World\n");
     //Setting up InitProcess
@@ -43,7 +48,7 @@ int main(){
     List_append(pAllProcesses,&initProcess);
     bool initProcessIsAlive = true;
     while(initProcessIsAlive){
-    //runRunningProcess(pAllProcesses);
+    runRunningProcess(&initProcess);
     char command;
     printf("Enter a command: ");
     scanf("%c",&command);
