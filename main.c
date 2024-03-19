@@ -2,9 +2,12 @@
 #include <stdbool.h>
 #include <string.h>
 #include "list.h"
-#include "helpers.h"
 
-#include "scheduler.c"
+#include "helpers.h"
+#include "scheduler.h"
+#include "functions.h"
+#include "semaphore.h"
+#include "ipc.h"
 
 // global Variables
 bool initProcessIsAlive;
@@ -92,7 +95,7 @@ int main() {
     return 0;
 }
 
-void commands(char* command) {
+void runCommand(char* command) {
     switch (*command) {
         case 'C':
             Create();
