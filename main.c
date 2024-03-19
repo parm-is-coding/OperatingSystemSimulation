@@ -8,7 +8,6 @@
 bool initProcessIsAlive;
 ProcessControlBlock initProcess;
 
-
 typedef struct {
     int PID;
     int time;
@@ -39,7 +38,7 @@ void runRunningProcess(ProcessControlBlock* test){
     printf("Running Process ID:%d\n",pRunningProcess->PID);
 }
 
-void createInitProcess (ProcessControlBlock* initProcess) {
+void createInitProcess () {
     initProcess->PID = 0;
     initProcess->priority = initP;
     initProcess->state = Running;
@@ -84,7 +83,7 @@ int main(){
 
     //the commands are qued up and run as the user enters the Q command
     }
-    
+
     printf("Simulation is Over");
     return 0;
 }
