@@ -58,6 +58,7 @@ int main() {
         scanf("%c",&command);
         operatingSystem_runCommand(&command,&kernal);
     }
+    operatingSystem_Destructor(&kernal);
     printf("Simulation is Over");
     return 0;
 }

@@ -2,6 +2,7 @@
 #define semaphore_h
 #include "list.h"
 
+
 typedef struct {
     int Value;
     List* queue;
