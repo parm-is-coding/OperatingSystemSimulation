@@ -1,8 +1,9 @@
 #include "../HeaderFiles/ipc.h"
-#include "../HeaderFiles/basefunctions.h"
+#include "../HeaderFiles/baseFunctions.h"
 #include "../HeaderFiles/semaphore.h"
+#include "../HeaderFiles/operatingSystem.h"
 #include <stdio.h>
-
+void operatingSystem_Constructor(OperatingSystem* pOperatingSystem){}
 void runCommand(char* command) {
     switch (*command) {
         case 'C':

@@ -5,7 +5,7 @@
 
 #include "HeaderFiles/list.h"
 #include "HeaderFiles/scheduler.h"
-#include "HeaderFiles/basefunctions.h"
+#include "HeaderFiles/baseFunctions.h"
 #include "HeaderFiles/semaphore.h"
 #include "HeaderFiles/ipc.h"
 #include "HeaderFiles/operatingSystem.h"

@@ -1,7 +1,23 @@
 #ifndef OPERATINGSYSTEM_H
 #define OPERATINGSYSTEM_H
 #include "ipc.h"
-#include "basefunctions.h"
+#include "baseFunctions.h"
+#include "pcb.h"
+#include "list.h"
+typedef struct {
+    //currently running process
+    ProcessControlBlock* runningProcess;
+    // list of all processes apart from init
+    List* allProcesses;
+    // priority based ready queues
+    List readyQueues[3];
+    // initProcess
+    ProcessControlBlock initProcess; 
+    //semphors array[5]
+    Semaphore semaphors[5];
+} OperatingSystem;
+
+void operatingSystem_Constructor(OperatingSystem* pOperatingSystem);
 
 //O(n)
 //iterates over the list of all P.C.B and returns
