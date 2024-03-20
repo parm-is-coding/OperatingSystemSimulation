@@ -56,7 +56,7 @@ int main() {
         //get user command
         printf("Enter a command: ");
         scanf("%c",&command);
-        runCommand(&command,&kernal);
+        operatingSystem_runCommand(&command,&kernal);
     }
     printf("Simulation is Over");
     return 0;

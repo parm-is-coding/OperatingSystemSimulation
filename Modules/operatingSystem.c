@@ -18,7 +18,7 @@ void operatingSystem_Constructor(OperatingSystem* pOperatingSystem){
 
 }
 //time complexity: O(N)
-bool isValidPID(OperatingSystem* pKernal,int PID){
+bool operatingSystem_isValidPID(OperatingSystem* pKernal,int PID){
     List_first(pKernal->allProcesses);
     while(pKernal->allProcesses->lastOutOfBoundsReason != LIST_OOB_END){
         ProcessControlBlock* pcb = (ProcessControlBlock*)pKernal->allProcesses->pCurrentNode->pItem; 
@@ -29,7 +29,7 @@ bool isValidPID(OperatingSystem* pKernal,int PID){
     }
     return false;
 }
-void runCommand(char* command,OperatingSystem* pKernal) {
+void operatingSystem_runCommand(char* command,OperatingSystem* pKernal) {
     switch (*command) {
         case 'C':
             Create();
