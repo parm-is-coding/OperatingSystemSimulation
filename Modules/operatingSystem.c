@@ -3,7 +3,20 @@
 #include "../HeaderFiles/semaphore.h"
 #include "../HeaderFiles/operatingSystem.h"
 #include <stdio.h>
-void operatingSystem_Constructor(OperatingSystem* pOperatingSystem){}
+
+void operatingSystem_Constructor(OperatingSystem* pOperatingSystem){
+    //initialize initProcess
+    pOperatingSystem->initProcess.PID = 0;
+    pOperatingSystem->initProcess.priority = initPri;
+    pOperatingSystem->initProcess.state = Running;
+    pOperatingSystem->initProcess.messages = "";
+    pOperatingSystem->initProcess.time = 0; //not sure if we need this
+    
+    //initialize the first running Process as initProcess
+    pOperatingSystem->runningProcess = &pOperatingSystem->initProcess;
+
+}
+
 void runCommand(char* command) {
     switch (*command) {
         case 'C':

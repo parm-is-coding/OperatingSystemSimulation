@@ -47,10 +47,11 @@
 int main() {
     
     bool initProcessIsAlive = true;
-  
+    OperatingSystem kernal;
+    operatingSystem_Constructor(&kernal);
+
 
     char command;
-
     while(initProcessIsAlive){
         
         

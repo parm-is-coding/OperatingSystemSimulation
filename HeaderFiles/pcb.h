@@ -18,6 +18,6 @@ typedef struct {
     char* messages;
 } ProcessControlBlock;
 
-void createInitProcess();
+void pcb_Constructor();
 
 #endif // PCB_H
