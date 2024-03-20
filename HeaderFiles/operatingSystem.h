@@ -28,6 +28,6 @@ void operatingSystem_Constructor(OperatingSystem* pOperatingSystem);
 //the index of the of the process with the matching PID
 // -1 if not found
 int find(int PID); 
-void runCommand(char* command);
+void runCommand(char* command,OperatingSystem* pKernal);
 
 #endif // OPERATINGSYSTEM_H

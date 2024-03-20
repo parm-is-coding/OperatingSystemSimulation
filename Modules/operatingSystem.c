@@ -18,7 +18,7 @@ void operatingSystem_Constructor(OperatingSystem* pOperatingSystem){
 
 }
 
-void runCommand(char* command) {
+void runCommand(char* command,OperatingSystem* pKernal) {
     switch (*command) {
         case 'C':
             Create();

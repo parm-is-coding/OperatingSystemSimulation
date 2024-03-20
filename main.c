@@ -53,12 +53,10 @@ int main() {
 
     char command;
     while(kernal.initProcessIsAlive){
-        
-        
         //get user command
         printf("Enter a command: ");
         scanf("%c",&command);
-        runCommand(&command);
+        runCommand(&command,&kernal);
     }
     printf("Simulation is Over");
     return 0;
