@@ -17,7 +17,18 @@ void operatingSystem_Constructor(OperatingSystem* pOperatingSystem){
     pOperatingSystem->runningProcess = &pOperatingSystem->initProcess;
 
 }
-
+//time complexity: O(N)
+bool isValidPID(OperatingSystem* pKernal,int PID){
+    List_first(pKernal->allProcesses);
+    while(pKernal->allProcesses->lastOutOfBoundsReason != LIST_OOB_END){
+        ProcessControlBlock* pcb = (ProcessControlBlock*)pKernal->allProcesses->pCurrentNode->pItem; 
+        if(pcb->PID == PID){
+            return true;
+        }
+        List_next(pKernal->allProcesses);
+    }
+    return false;
+}
 void runCommand(char* command,OperatingSystem* pKernal) {
     switch (*command) {
         case 'C':
@@ -27,7 +38,7 @@ void runCommand(char* command,OperatingSystem* pKernal) {
             Fork();
             break;
         case 'K':
-            Kill();
+            Kill(pKernal);
             break;
         case 'E':
             Exit();

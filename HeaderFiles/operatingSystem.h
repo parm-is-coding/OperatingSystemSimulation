@@ -5,6 +5,7 @@
 #include "pcb.h"
 #include "list.h"
 #include <stdbool.h>
+#include "semaphore.h"
 
 typedef struct {
     //currently running process
