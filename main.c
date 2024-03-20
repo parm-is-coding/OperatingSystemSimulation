@@ -9,7 +9,7 @@
 #include "HeaderFiles/semaphore.h"
 #include "HeaderFiles/ipc.h"
 #include "HeaderFiles/operatingSystem.h"
-
+#include "HeaderFiles/helper.h"
 
 
 
@@ -56,7 +56,8 @@ int main() {
         //get user command
         printf("Enter a command: ");
         scanf("%c",&command);
-        operatingSystem_runCommand(&command,&kernal);
+        helper_clearStdinBuffer();
+        operatingSystem_runCommand(command,&kernal);
     }
     operatingSystem_Destructor(&kernal);
     printf("Simulation is Over");
