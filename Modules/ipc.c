@@ -7,6 +7,12 @@
 #include "../HeaderFiles/semaphore.h"
 #include <stdio.h>
 #include <stdbool.h>
-void Send(){}
-void Receive(){}
-void Reply(){}
+void Send(){
+    printf("Send command executed\n");
+}
+void Receive(){
+    printf("Receive command executed\n");
+}
+void Reply(){
+    printf("Reply command executed\n");
+}

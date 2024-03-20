@@ -7,6 +7,12 @@
 #include "../HeaderFiles/semaphore.h"
 #include <stdio.h>
 #include <stdbool.h>
-void New_Sem(){}
-void Sem_P(){}
-void Sem_V(){}
+void New_Sem(){
+    printf("New_Sem command executed\n");
+}
+void Sem_P(){
+    printf("Sem_P command executed\n");
+}
+void Sem_V(){
+    printf("Sem_V command executed\n");
+}
