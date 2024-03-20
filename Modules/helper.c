@@ -1,0 +1,4 @@
+
+void clearStdinBuffer(){
+    printtf("test");
+}

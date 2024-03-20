@@ -34,6 +34,6 @@ void operatingSystem_Destructor(OperatingSystem* pKernal);
 // -1 if not found
 ProcessControlBlock* operatingSystem_findPID(OperatingSystem* pKernal,int PID);
 
-void operatingSystem_runCommand(char* command,OperatingSystem* pKernal);
+void operatingSystem_runCommand(char command,OperatingSystem* pKernal);
 
 #endif // OPERATINGSYSTEM_H

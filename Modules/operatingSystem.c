@@ -1,9 +1,13 @@
-#include "../HeaderFiles/ipc.h"
 #include "../HeaderFiles/baseFunctions.h"
-#include "../HeaderFiles/semaphore.h"
+#include "../HeaderFiles/ipc.h"
+#include "../HeaderFiles/list.h"
 #include "../HeaderFiles/operatingSystem.h"
+#include "../HeaderFiles/pcb.h"
+#include "../HeaderFiles/scheduler.h"
+#include "../HeaderFiles/semaphore.h"
 #include <stdio.h>
 #include <stdbool.h>
+
 
 void operatingSystem_Constructor(OperatingSystem* pOperatingSystem){
     //initialize initProcess
@@ -32,8 +36,8 @@ ProcessControlBlock* operatingSystem_findPID(OperatingSystem* pKernal,int PID){
     }
     return (ProcessControlBlock*)-1;
 }
-void operatingSystem_runCommand(char* command,OperatingSystem* pKernal) {
-    switch (*command) {
+void operatingSystem_runCommand(char command,OperatingSystem* pKernal) {
+    switch (command){
         case 'C':
             Create();
             break;
