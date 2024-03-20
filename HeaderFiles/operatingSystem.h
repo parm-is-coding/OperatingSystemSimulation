@@ -4,6 +4,8 @@
 #include "baseFunctions.h"
 #include "pcb.h"
 #include "list.h"
+#include <stdbool.h>
+
 typedef struct {
     //currently running process
     ProcessControlBlock* runningProcess;
@@ -15,6 +17,8 @@ typedef struct {
     ProcessControlBlock initProcess; 
     //semphors array[5]
     Semaphore semaphors[5];
+    //the condition in which the simulation will continue to run
+    bool initProcessIsAlive;
 } OperatingSystem;
 
 void operatingSystem_Constructor(OperatingSystem* pOperatingSystem);

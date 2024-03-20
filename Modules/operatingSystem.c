@@ -3,6 +3,7 @@
 #include "../HeaderFiles/semaphore.h"
 #include "../HeaderFiles/operatingSystem.h"
 #include <stdio.h>
+#include <stdbool.h>
 
 void operatingSystem_Constructor(OperatingSystem* pOperatingSystem){
     //initialize initProcess
@@ -11,7 +12,7 @@ void operatingSystem_Constructor(OperatingSystem* pOperatingSystem){
     pOperatingSystem->initProcess.state = Running;
     pOperatingSystem->initProcess.messages = "";
     pOperatingSystem->initProcess.time = 0; //not sure if we need this
-    
+    pOperatingSystem->initProcessIsAlive = true;
     //initialize the first running Process as initProcess
     pOperatingSystem->runningProcess = &pOperatingSystem->initProcess;
 
