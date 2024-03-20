@@ -17,17 +17,20 @@ void operatingSystem_Constructor(OperatingSystem* pOperatingSystem){
     pOperatingSystem->runningProcess = &pOperatingSystem->initProcess;
 
 }
+void operatingSystem_Destructor(OperatingSystem* pKernal){
+    //free all the lists
+}
 //time complexity: O(N)
-bool operatingSystem_isValidPID(OperatingSystem* pKernal,int PID){
+ProcessControlBlock* operatingSystem_findPID(OperatingSystem* pKernal,int PID){
     List_first(pKernal->allProcesses);
     while(pKernal->allProcesses->lastOutOfBoundsReason != LIST_OOB_END){
         ProcessControlBlock* pcb = (ProcessControlBlock*)pKernal->allProcesses->pCurrentNode->pItem; 
         if(pcb->PID == PID){
-            return true;
+            return pcb;
         }
         List_next(pKernal->allProcesses);
     }
-    return false;
+    return (ProcessControlBlock*)-1;
 }
 void operatingSystem_runCommand(char* command,OperatingSystem* pKernal) {
     switch (*command) {
@@ -41,7 +44,7 @@ void operatingSystem_runCommand(char* command,OperatingSystem* pKernal) {
             Kill(pKernal);
             break;
         case 'E':
-            Exit();
+            Exit(pKernal);
             break;
         case 'Q':
             Quantum();

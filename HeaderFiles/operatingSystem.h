@@ -14,6 +14,10 @@ typedef struct {
     List* allProcesses;
     // priority based ready queues
     List readyQueues[3];
+    //IPC senderProcesses waiting for acknowledge reply from recieverProcess
+    List waitingReply;
+    //IPC recieverProcesses waiting for msg from senderProcesses
+    List WaitingSend;
     // initProcess
     ProcessControlBlock initProcess; 
     //semphors array[5]
@@ -23,12 +27,13 @@ typedef struct {
 } OperatingSystem;
 
 void operatingSystem_Constructor(OperatingSystem* pOperatingSystem);
-bool operatingSystem_isValidPID(OperatingSystem* pKernal,int PID);
+void operatingSystem_Destructor(OperatingSystem* pKernal);
 //O(n)
 //iterates over the list of all P.C.B and returns
-//the index of the of the process with the matching PID
+//the address of the of the process with the matching PID
 // -1 if not found
-int find(int PID); 
+ProcessControlBlock* operatingSystem_findPID(OperatingSystem* pKernal,int PID);
+
 void operatingSystem_runCommand(char* command,OperatingSystem* pKernal);
 
 #endif // OPERATINGSYSTEM_H

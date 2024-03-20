@@ -7,7 +7,9 @@ typedef struct {
     enum State {
         Ready,
         Running,
-        Blocked
+        Blocked,
+        WaitingSender,
+        WaitingReciever
     } state;
     enum Priority{
         High = 0,
