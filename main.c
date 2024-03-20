@@ -1,54 +1,26 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include <string.h>
-#include "list.h"
-
-#include "helpers.h"
-#include "scheduler.h"
-#include "functions.h"
-#include "semaphore.h"
-#include "ipc.h"
-
-// global Variables
-bool initProcessIsAlive;
-ProcessControlBlock initProcess;
-
-typedef struct {
-    int PID;
-    int time;
-    enum State {
-        Ready,
-        Running,
-        Blocked
-    } state;
-    enum Priority{
-        High = 0,
-        Medium = 1,
-        Low = 2,
-        initP = 3
-    } priority;
-    char* messages;
-} ProcessControlBlock;
-
-typedef struct {
-    int Value;
-    List* queue;
-}Semaphore;
 
 
-void runRunningProcess(ProcessControlBlock* test){
-    //iterate over the list of all processes return the address
-    //of the PCB that is in the running state
-    ProcessControlBlock* pRunningProcess = test;
-    printf("Running Process ID:%d\n",pRunningProcess->PID);
-}
+#include "HeaderFiles/list.h"
+#include "HeaderFiles/helpers.h"
+#include "HeaderFiles/scheduler.h"
+#include "HeaderFiles/functions.h"
+#include "HeaderFiles/semaphore.h"
+#include "HeaderFiles/ipc.h"
+#include "HeaderFiles/operatingSystem.h"
 
-void createInitProcess() {
-    initProcess->PID = 0;
-    initProcess->priority = initP;
-    initProcess->state = Running;
-    initProcessIsAlive = true;
-}
+
+
+
+
+
+
+
+
+
+
 
 
 //set up
@@ -71,30 +43,6 @@ void createInitProcess() {
                         //list.pop current (frees)
 
 //done
-
-
-int main() {
-    createInitProcess();
-
-    List* pAllProcesses = List_create(); //temporary
-    List_append(pAllProcesses,&initProcess);
-
-    char command;
-
-    while(initProcessIsAlive){
-        runProcess(); //scheduler chooses and runs a process, if empty -> do nothing
-        
-        //get user command
-        printf("Enter a command: ");
-        scanf("%c",&command);
-        
-        runCommand(&command);
-    }
-
-    printf("Simulation is Over");
-    return 0;
-}
-
 void runCommand(char* command) {
     switch (*command) {
         case 'C':
@@ -140,3 +88,25 @@ void runCommand(char* command) {
             printf("comand not recognized, please try again\n");
     }
 }
+
+int main() {
+    
+    bool initProcessIsAlive = true;
+  
+
+    char command;
+
+    while(initProcessIsAlive){
+        
+        
+        //get user command
+        printf("Enter a command: ");
+        scanf("%c",&command);
+        
+        runCommand(&command);
+    }
+
+    printf("Simulation is Over");
+    return 0;
+}
+
