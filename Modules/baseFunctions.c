@@ -74,6 +74,16 @@ void Proc_Info(OperatingSystem* pKernal){
     } 
     
 }
+//Iterate over all processes starting with init Process
+//callprint info on each node
 void Total_Info(OperatingSystem* pKernal){
     printf("TotalInfo command executed\n");
+    pcb_printInfo(&pKernal->initProcess);
+    List_first(pKernal->allProcesses);
+    pKernal->allProcesses->lastOutOfBoundsReason = LIST_OOB_START;
+    while(pKernal->allProcesses->pCurrentNode != NULL){
+        pcb_printInfo((ProcessControlBlock*)pKernal->allProcesses->pCurrentNode->pItem);
+        List_next(pKernal->allProcesses);
+    }
+    List_first(pKernal->allProcesses);
 }

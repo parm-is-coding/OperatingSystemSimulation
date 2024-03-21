@@ -36,4 +36,6 @@ The program runs in a loop until the initial process is terminated. During each 
  -TotalInfo Parm
  -Exit Parm
  -Quantum 
+ -Semaphores
+ -IPC
  -Kill Parm
