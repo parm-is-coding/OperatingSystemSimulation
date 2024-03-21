@@ -9,7 +9,7 @@ typedef struct {
         Ready = 1,
         Blocked = 2,
         WaitingSender = 3,
-        WaitingReciever = 4
+        WaitingReceiver = 4
     } state;
     enum Priority{
         High = 0,
