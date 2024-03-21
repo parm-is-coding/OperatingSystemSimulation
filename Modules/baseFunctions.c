@@ -10,8 +10,30 @@
 #include <stdbool.h>
 
 //created processes must be dynamically allocated PCBs
+//Prompt User for Priority
+//Validates input to be  0 1 or 2
+//Fail on input
+//Dynamically allocate space for a PCB
+//Construct the PCB with values
+//Append the PCB on all processes
+//prepend the PCB on the appropriate readyqueue 
 void Create(OperatingSystem* pKernal){
     printf("Create command executed\n");
+    //get userinput
+
+    int priority;
+    printf("Enter priority level 0 1 2 for new Process:");
+    scanf("%d",&priority);
+    helper_clearStdinBuffer();
+    if(priority == 0 ||priority == 1 ||priority == 2){
+        ProcessControlBlock* pPCB = malloc(sizeof(ProcessControlBlock));
+        pcb_Constructor(pPCB,priority);
+        List_append(&pKernal->allProcesses,pPCB);
+        List_prepend(&pKernal->readyQueues[pPCB->priority],pPCB);
+        printf("Success: new ProcessID: %d\n",pPCB->PID);
+    }else{
+        printf("Failure: Invalid Priority\n");
+    }
 }
 void Fork(OperatingSystem* pKernal){
     printf("Fork command executed\n");
