@@ -22,5 +22,5 @@ typedef struct {
 
 //Prints the contents of a processcontrolblock
 void pcb_printInfo(ProcessControlBlock* pPCB);
-
+void pcb_Destructor(ProcessControlBlock* pPCB);
 #endif // PCB_H
