@@ -28,8 +28,8 @@ void Create(OperatingSystem* pKernal){
     if(priority == 0 ||priority == 1 ||priority == 2){
         ProcessControlBlock* pPCB = malloc(sizeof(ProcessControlBlock));
         pcb_Constructor(pPCB,priority);
-        List_append(&pKernal->allProcesses,pPCB);
-        List_prepend(&pKernal->readyQueues[pPCB->priority],pPCB);
+        List_append(pKernal->allProcesses,pPCB);
+        List_prepend(pKernal->readyQueues[pPCB->priority],pPCB);
         printf("Success: new ProcessID: %d\n",pPCB->PID);
     }else{
         printf("Failure: Invalid Priority\n");
@@ -57,13 +57,15 @@ void Quantum(OperatingSystem* pKernal){
 //WAITING FOR CREATE TO BE IMPLEMENTED
 void Proc_Info(OperatingSystem* pKernal){
     printf("ProcessInfo command executed\n");
-    printf("Enter Valid Process ID:\n");
-    int PID = 0;
+    printf("Enter Valid Process ID:");
+    int PID;
+    scanf("%d",&PID);
+    helper_clearStdinBuffer();
     ProcessControlBlock* pPCB;
     if(PID == 0){
         pPCB = &(pKernal->initProcess);
     }else{
-        pPCB = operatingSystem_findPID(pKernal,PID);
+        pPCB = operatingSystem_findPID(pKernal, PID);
     }
     if(pPCB == NULL){
         printf("Failure: InvalidPID\n");
