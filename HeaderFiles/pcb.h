@@ -20,6 +20,7 @@ typedef struct {
     char* messages;
 } ProcessControlBlock;
 
-void pcb_Constructor();
+//Prints the contents of a processcontrolblock
+pcb_printInfo(ProcessControlBlock* pPCB);
 
 #endif // PCB_H
