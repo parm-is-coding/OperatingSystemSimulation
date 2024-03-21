@@ -52,7 +52,10 @@ void operatingSystem_Destructor(OperatingSystem* pKernal){
         return pPcbItem->PID == *(pPID);
     }
 ProcessControlBlock* operatingSystem_findPID(OperatingSystem* pKernal,int PID){
-    return (ProcessControlBlock*)List_search(pKernal->allProcesses,cmpfunc,&PID);
+    List_first(pKernal->allProcesses);
+    ProcessControlBlock* pPCB = List_search(pKernal->allProcesses,cmpfunc,&PID);
+    List_first(pKernal->allProcesses);
+    return pPCB;
 }
 void operatingSystem_runCommand(char command,OperatingSystem* pKernal) {
     switch (command){

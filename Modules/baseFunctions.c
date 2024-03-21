@@ -68,7 +68,7 @@ void Proc_Info(OperatingSystem* pKernal){
         pPCB = operatingSystem_findPID(pKernal, PID);
     }
     if(pPCB == NULL){
-        printf("Failure: InvalidPID\n");
+        printf("Failure: InvalidPID: %d\n",PID);
     }else{
         pcb_printInfo(pPCB);
     } 
