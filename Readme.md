@@ -31,4 +31,6 @@ For example, pKernal, ProcessControlBlock and operatingSystem_Constructor.
  The program assumes that the user will enter valid commands. It does not
  perform any error checking on the user input.
 
+ a process is either in a blocking queue waitingqueue readyqueue or it is initprocesses or it is running all processes are in all nodes except init process
+
  

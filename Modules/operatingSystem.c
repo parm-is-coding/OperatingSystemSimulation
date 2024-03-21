@@ -24,17 +24,26 @@ void operatingSystem_Constructor(OperatingSystem* pOperatingSystem){
 void operatingSystem_Destructor(OperatingSystem* pKernal){
     //free all the lists
 }
+
+// static bool pidComparator(void* pItem, void* pComparisonArg) 
+// {
+//     ProcessControlBlock* pcb = pItem;
+//     int pid = pComparisonArg;
+//     return pcb->PID == pid;
+// }
+
 //time complexity: O(N)
 ProcessControlBlock* operatingSystem_findPID(OperatingSystem* pKernal,int PID){
-    List_first(pKernal->allProcesses);
-    while(pKernal->allProcesses->lastOutOfBoundsReason != LIST_OOB_END){
-        ProcessControlBlock* pcb = (ProcessControlBlock*)pKernal->allProcesses->pCurrentNode->pItem; 
-        if(pcb->PID == PID){
-            return pcb;
-        }
-        List_next(pKernal->allProcesses);
-    }
-    return (ProcessControlBlock*)-1;
+    //List_search(pKernal->allProcesses,pidComparator,PID);
+    // List_first(pKernal->allProcesses);
+    // while(pKernal->allProcesses->lastOutOfBoundsReason != LIST_OOB_END){
+    //     ProcessControlBlock* pcb = (ProcessControlBlock*)pKernal->allProcesses->pCurrentNode->pItem; 
+    //     if(pcb->PID == PID){
+    //         return pcb;
+    //     }
+    //     List_next(pKernal->allProcesses);
+    // }
+    return NULL;
 }
 void operatingSystem_runCommand(char command,OperatingSystem* pKernal) {
     switch (command){

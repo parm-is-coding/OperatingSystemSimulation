@@ -5,11 +5,11 @@ typedef struct {
     int PID;
     int time;
     enum State {
-        Ready,
-        Running,
-        Blocked,
-        WaitingSender,
-        WaitingReciever
+        Running = 0,
+        Ready = 1,
+        Blocked = 2,
+        WaitingSender = 3,
+        WaitingReciever = 4
     } state;
     enum Priority{
         High = 0,
@@ -21,6 +21,6 @@ typedef struct {
 } ProcessControlBlock;
 
 //Prints the contents of a processcontrolblock
-pcb_printInfo(ProcessControlBlock* pPCB);
+void pcb_printInfo(ProcessControlBlock* pPCB);
 
 #endif // PCB_H

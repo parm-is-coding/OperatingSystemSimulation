@@ -9,3 +9,7 @@
 #include <stdio.h>
 #include <stdbool.h>
 void pcb_Constructor();
+
+void pcb_printInfo(ProcessControlBlock* pPCB){
+    printf("ProcessID: %d\nTime to execute: %d\nState: %d\nPriority: %d\nMessages: %s",pPCB->PID,pPCB->time,pPCB->state,pPCB->priority,pPCB->messages);    
+}

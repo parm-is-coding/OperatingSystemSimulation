@@ -5,6 +5,7 @@
 #include "../HeaderFiles/pcb.h"
 #include "../HeaderFiles/scheduler.h"
 #include "../HeaderFiles/semaphore.h"
+#include "../HeaderFiles/helper.h"
 #include <stdio.h>
 #include <stdbool.h>
 
@@ -17,7 +18,7 @@ void Fork(){
 }
 
 void Kill(OperatingSystem* pKernal){
-    printf("Kill command executed\n");
+    printf(" command executed\n");
 }
 void Exit(OperatingSystem* pKernal){
     printf("Exit command executed\n");
@@ -25,8 +26,17 @@ void Exit(OperatingSystem* pKernal){
 void Quantum(){
     printf("Quantum command executed\n");
 }
-void Proc_Info(){
+//Get PID from user
+//Maybe from PID error checking
+//find the process with the same pid as the user requested
+//print all the info
+void Proc_Info(OperatingSystem* pKernal){
     printf("ProcessInfo command executed\n");
+    //printf("Enter Valid Process ID:\n");
+    //int PID;
+    //ProcessControlBlock* pPCB = List_search(); 
+    pcb_printInfo(&pKernal->initProcess);
+    
 }
 void Total_Info(){
     printf("TotalInfo command executed\n");
