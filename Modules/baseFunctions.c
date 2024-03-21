@@ -27,15 +27,16 @@ void Quantum(OperatingSystem* pKernal){
     printf("Quantum command executed\n");
 }
 
-//Get PID from user
+//Get PID from user NEED TO DO
 //Maybe from PID error checking
 //find the process with the same pid as the user requested
 //print all the info
+//NOT TESTED FOR CREATED PROCESS 
+//WAITING FOR CREATE TO BE IMPLEMENTED
 void Proc_Info(OperatingSystem* pKernal){
     printf("ProcessInfo command executed\n");
     printf("Enter Valid Process ID:\n");
     int PID = 0;
-    //ProcessControlBlock* pPCB = List_search();
     ProcessControlBlock* pPCB;
     if(PID == 0){
         pPCB = &(pKernal->initProcess);
