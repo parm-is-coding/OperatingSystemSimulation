@@ -35,7 +35,27 @@ void pcb_printInfo(ProcessControlBlock* pPCB){
         exit(1);
         break;
     }
-    printf("\nProcessID: %d\nTime to execute: %d\nState: %s\nPriority: %d\nMessages: %s\n\n",pPCB->PID,pPCB->time,state,pPCB->priority,pPCB->messages);    
+    char* priority;
+    switch (pPCB->priority)
+    {
+    case High:
+        priority = "High";
+        break;
+    case Medium:
+        priority = "Medium";
+        break;
+    case Low:
+        priority = "Low";
+        break;
+    case initPri:
+        priority = "Lowest";
+        break;
+    default:
+        printf("ERROR THIS IN pcb_printInfo");
+        exit(1);
+        break;
+    }
+    printf("\nProcessID: %d\nTime to execute: %d\nState: %s\nPriority: %s\nMessages: %s\n\n",pPCB->PID,pPCB->time,state,priority,pPCB->messages);    
 }
 
 void pcb_Constructor(ProcessControlBlock* pPCB,int priority){
