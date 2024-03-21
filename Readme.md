@@ -31,9 +31,13 @@ The program runs in a loop until the initial process is terminated. During each 
 
 [Provide any assumptions made during the development of the project here]
 
+# Complete
+ProcInfo
+TotalInfo
+Kernal
 
  # Todo
- -TotalInfo Parm
+ 
  -Exit Parm
  -Quantum 
  -Semaphores
