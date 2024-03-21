@@ -47,19 +47,23 @@
 int main() {
     
     
-    OperatingSystem kernal;
-    operatingSystem_Constructor(&kernal);
+    OperatingSystem* pKernal = malloc(sizeof(OperatingSystem));
+    if (pKernal == NULL) {
+        printf("Failed to allocate memory for kernal\n");
+        return 1;
+    }
+    operatingSystem_Constructor(pKernal);
 
 
     char command;
-    while(kernal.initProcessIsAlive){
+    while(pKernal->initProcessIsAlive){
         //get user command
         printf("Enter a command: ");
         scanf("%c",&command);
         helper_clearStdinBuffer();
-        operatingSystem_runCommand(command,&kernal);
+        operatingSystem_runCommand(command,pKernal);
     }
-    operatingSystem_Destructor(&kernal);
+    operatingSystem_Destructor(pKernal);
     printf("Simulation is Over");
     return 0;
 }

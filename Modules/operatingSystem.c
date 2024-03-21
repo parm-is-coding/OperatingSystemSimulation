@@ -22,7 +22,7 @@ void operatingSystem_Constructor(OperatingSystem* pOperatingSystem){
 
 }
 void operatingSystem_Destructor(OperatingSystem* pKernal){
-    //free all the lists
+    free(pKernal);
 }
 
 // static bool pidComparator(void* pItem, void* pComparisonArg) 
@@ -48,10 +48,10 @@ ProcessControlBlock* operatingSystem_findPID(OperatingSystem* pKernal,int PID){
 void operatingSystem_runCommand(char command,OperatingSystem* pKernal) {
     switch (command){
         case 'C':
-            Create();
+            Create(pKernal);
             break;
         case 'F':
-            Fork();
+            Fork(pKernal);
             break;
         case 'K':
             Kill(pKernal);
@@ -60,31 +60,31 @@ void operatingSystem_runCommand(char command,OperatingSystem* pKernal) {
             Exit(pKernal);
             break;
         case 'Q':
-            Quantum();
+            Quantum(pKernal);
             break;
         case 'S':
-            Send();
+            Send(pKernal);
             break;
         case 'R':
-            Receive();
+            Receive(pKernal);
             break;
         case 'Y':
-            Reply();
+            Reply(pKernal);
             break;
         case 'N':
-            New_Sem();
+            New_Sem(pKernal);
             break;
         case 'P':
-            Sem_P();
+            Sem_P(pKernal);
             break;
         case 'V':
-            Sem_V();
+            Sem_V(pKernal);
             break;
         case 'I':
-            Proc_Info();
+            Proc_Info(pKernal);
             break;
         case 'T':
-            Total_Info();
+            Total_Info(pKernal);
             break;
         default: //invalid command
             printf("comand not recognized, please try again\n");

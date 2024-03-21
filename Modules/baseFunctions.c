@@ -10,10 +10,10 @@
 #include <stdbool.h>
 
 //created processes must be dynamically allocated PCBs
-void Create(){
+void Create(OperatingSystem* pKernal){
     printf("Create command executed\n");
 }
-void Fork(){
+void Fork(OperatingSystem* pKernal){
     printf("Fork command executed\n");
 }
 
@@ -23,7 +23,7 @@ void Kill(OperatingSystem* pKernal){
 void Exit(OperatingSystem* pKernal){
     printf("Exit command executed\n");
 }
-void Quantum(){
+void Quantum(OperatingSystem* pKernal){
     printf("Quantum command executed\n");
 }
 //Get PID from user
@@ -35,9 +35,10 @@ void Proc_Info(OperatingSystem* pKernal){
     //printf("Enter Valid Process ID:\n");
     //int PID;
     //ProcessControlBlock* pPCB = List_search(); 
-    pcb_printInfo(&pKernal->initProcess);
+    ProcessControlBlock* pPCB = &(pKernal->initProcess);
+    pcb_printInfo(pPCB);
     
 }
-void Total_Info(){
+void Total_Info(OperatingSystem* pKernal){
     printf("TotalInfo command executed\n");
 }

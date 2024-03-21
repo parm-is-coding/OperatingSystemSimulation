@@ -3,6 +3,6 @@ Modules= Modules/helper.c Modules/baseFunctions.c Modules/ipc.c Modules/operatin
 all: build
 
 build:	
-	gcc -I HeaderFiles main.c $(Modules) list.o -o simulation
+	gcc -g -I HeaderFiles main.c $(Modules) list.o -o simulation
 run: build
 	./simulation

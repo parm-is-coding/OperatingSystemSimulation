@@ -7,12 +7,12 @@
 #include "../HeaderFiles/semaphore.h"
 #include <stdio.h>
 #include <stdbool.h>
-void Send(){
+void Send(OperatingSystem* pKernal){
     printf("Send command executed\n");
 }
-void Receive(){
+void Receive(OperatingSystem* pKernal){
     printf("Receive command executed\n");
 }
-void Reply(){
+void Reply(OperatingSystem* pKernal){
     printf("Reply command executed\n");
 }

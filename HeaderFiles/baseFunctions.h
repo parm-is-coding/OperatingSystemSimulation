@@ -5,12 +5,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void Create();
-void Fork();
+void Create(OperatingSystem* pKernal);
+void Fork(OperatingSystem* pKernal);
 void Kill(OperatingSystem* pKernal);
 void Exit(OperatingSystem* pKernal);
-void Quantum();
-void Proc_Info();
-void Total_Info();
+void Quantum(OperatingSystem* pKernal);
+void Proc_Info(OperatingSystem* pKernal);
+void Total_Info(OperatingSystem* pKernal);
 
 #endif
