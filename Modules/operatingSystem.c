@@ -19,7 +19,6 @@ void operatingSystem_Constructor(OperatingSystem* pOperatingSystem){
     pOperatingSystem->initProcessIsAlive = true;
     //initialize the first running Process as initProcess
     pOperatingSystem->runningProcess = &pOperatingSystem->initProcess;
-
 }
 void operatingSystem_Destructor(OperatingSystem* pKernal){
     free(pKernal);

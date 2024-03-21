@@ -26,17 +26,27 @@ void Exit(OperatingSystem* pKernal){
 void Quantum(OperatingSystem* pKernal){
     printf("Quantum command executed\n");
 }
+
 //Get PID from user
 //Maybe from PID error checking
 //find the process with the same pid as the user requested
 //print all the info
 void Proc_Info(OperatingSystem* pKernal){
     printf("ProcessInfo command executed\n");
-    //printf("Enter Valid Process ID:\n");
-    //int PID;
-    //ProcessControlBlock* pPCB = List_search(); 
-    ProcessControlBlock* pPCB = &(pKernal->initProcess);
-    pcb_printInfo(pPCB);
+    printf("Enter Valid Process ID:\n");
+    int PID = 0;
+    //ProcessControlBlock* pPCB = List_search();
+    ProcessControlBlock* pPCB;
+    if(PID == 0){
+        pPCB = &(pKernal->initProcess);
+    }else{
+        pPCB = operatingSystem_findPID(pKernal,PID);
+    }
+    if(pPCB == NULL){
+        printf("Failure: InvalidPID\n");
+    }else{
+        pcb_printInfo(pPCB);
+    } 
     
 }
 void Total_Info(OperatingSystem* pKernal){

@@ -11,7 +11,7 @@ typedef struct {
     //currently running process
     ProcessControlBlock* runningProcess;
     // list of all processes apart from init
-    List* allProcesses;
+    List allProcesses;
     // priority based ready queues
     List readyQueues[3];
     //IPC senderProcesses waiting for acknowledge reply from recieverProcess
