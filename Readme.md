@@ -35,11 +35,13 @@ The program runs in a loop until the initial process is terminated. During each 
 ProcInfo
 TotalInfo
 Kernal
+# In Progress
+ Quantum Parm (Hard)
 
  # Todo
  
- -Exit Parm
- -Quantum 
- -Semaphores
- -IPC
- -Kill Parm
+ -Exit Parm (Easy)
+ -Kill Parm (Hard)
+
+ -Semaphores (Medium)
+ -IPC (Hard)
