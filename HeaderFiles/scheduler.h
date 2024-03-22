@@ -1,6 +1,9 @@
 #ifndef SCHEDULER_H
 #define SCHEDULER_H
+#include "operatingSystem.h"
 
-// Your code goes here
+void scheduler_runRunningProcess(OperatingSystem* pKernal);
+void scheduler_returnRunningToReady(OperatingSystem* pKernal);
+void scheduler_pickNextRunningProcess(OperatingSystem* pKernal);
 
 #endif // SCHEDULER_H

@@ -8,6 +8,7 @@
 #include "../HeaderFiles/semaphore.h"
 #include <stdio.h>
 #include <stdbool.h>
+#include <stdlib.h>
 static int nextPID = 1;
 void pcb_Constructor();
 

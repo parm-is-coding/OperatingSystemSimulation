@@ -7,6 +7,7 @@
 #include "../HeaderFiles/semaphore.h"
 #include <stdio.h>
 #include <stdbool.h>
+#include <stdlib.h>
 
 
 void operatingSystem_Constructor(OperatingSystem* pOperatingSystem){

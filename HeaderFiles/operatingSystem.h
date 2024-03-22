@@ -1,7 +1,7 @@
 #ifndef OPERATINGSYSTEM_H
 #define OPERATINGSYSTEM_H
 #include "ipc.h"
-#include "baseFunctions.h"
+
 #include "pcb.h"
 #include "list.h"
 #include <stdbool.h>

@@ -8,6 +8,7 @@
 #include "../HeaderFiles/helper.h"
 #include <stdio.h>
 #include <stdbool.h>
+#include <stdlib.h>
 
 //created processes must be dynamically allocated PCBs
 //Prompt User for Priority
@@ -44,9 +45,20 @@ void Kill(OperatingSystem* pKernal){
 }
 void Exit(OperatingSystem* pKernal){
     printf("Exit command executed\n");
+
 }
+//check to see if there are any processes on any of the ready queues
+    // if all the ready queues are empty
+      //   set init process as the running processes
+// else there is at least one processes that can be run for a quantum 
+    //check to see if the currently running processes is init process or 
+    //
+    //take pickappropriateReadyqueue() and trim the right most 
 void Quantum(OperatingSystem* pKernal){
     printf("Quantum command executed\n");
+    scheduler_runRunningProcess(pKernal);
+    scheduler_returnRunningToReady(pKernal);
+    scheduler_pickNextRunningProcess(pKernal);
 }
 
 //Get PID from user NEED TO DO
@@ -87,3 +99,4 @@ void Total_Info(OperatingSystem* pKernal){
     }
     List_first(pKernal->allProcesses);
 }
+

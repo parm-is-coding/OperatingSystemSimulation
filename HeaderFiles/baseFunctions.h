@@ -1,9 +1,7 @@
 #ifndef functions_h
 #define functions_h
+
 #include "operatingSystem.h"
-#include "semaphore.h"
-#include <stdio.h>
-#include <stdlib.h>
 
 void Create(OperatingSystem* pKernal);
 void Fork(OperatingSystem* pKernal);
