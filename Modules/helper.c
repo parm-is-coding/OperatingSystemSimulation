@@ -13,3 +13,8 @@ void helper_clearStdinBuffer(){
     char c;
     while ((c = getchar()) != '\n' && c != EOF);
 }
+bool helper_cmpfunc(void* pItem,void* pArg ){
+        ProcessControlBlock* pPcbItem = pItem;
+        int* pPID = pArg;
+        return pPcbItem->PID == *(pPID);
+}

@@ -24,6 +24,7 @@ typedef struct {
     Semaphore semaphors[5];
     //the condition in which the simulation will continue to run
     bool initProcessIsAlive;
+    int numCycles;
 } OperatingSystem;
 
 void operatingSystem_Constructor(OperatingSystem* pOperatingSystem);

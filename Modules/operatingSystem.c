@@ -5,6 +5,7 @@
 #include "../HeaderFiles/pcb.h"
 #include "../HeaderFiles/scheduler.h"
 #include "../HeaderFiles/semaphore.h"
+#include "../HeaderFiles/helper.h"
 #include <stdio.h>
 #include <stdbool.h>
 #include <stdlib.h>
@@ -26,6 +27,7 @@ void operatingSystem_Constructor(OperatingSystem* pOperatingSystem){
     pOperatingSystem->readyQueues[0] = List_create();
     pOperatingSystem->readyQueues[1] = List_create();
     pOperatingSystem->readyQueues[2] = List_create();
+    pOperatingSystem->numCycles = 0;
     //Probably Change this when doing IPC
     
 }
@@ -47,14 +49,10 @@ void operatingSystem_Destructor(OperatingSystem* pKernal){
 
 
 
-    static bool cmpfunc(void* pItem,void* pArg ){
-        ProcessControlBlock* pPcbItem = pItem;
-        int* pPID = pArg;
-        return pPcbItem->PID == *(pPID);
-    }
+    
 ProcessControlBlock* operatingSystem_findPID(OperatingSystem* pKernal,int PID){
     List_first(pKernal->allProcesses);
-    ProcessControlBlock* pPCB = List_search(pKernal->allProcesses,cmpfunc,&PID);
+    ProcessControlBlock* pPCB = List_search(pKernal->allProcesses,helper_cmpfunc,&PID);
     List_first(pKernal->allProcesses);
     return pPCB;
 }
