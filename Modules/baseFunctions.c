@@ -54,13 +54,17 @@ void Exit(OperatingSystem* pKernal){
             
 
         }else{
-            printf("Failure: Init Process is not Alone\n");
+            printf("Failure: Init Process to be Run and is not Alone\n");
         }
+    }else{
+        //Running Process is not init Process
+        printf("Exiting Running Process PID:%d\n",pKernal->runningProcess->PID);
+        helper_removeFromAllProcesses(pKernal->allProcesses,pKernal->runningProcess->PID);
+        pKernal->runningProcess = NULL;
+        scheduler_pickNextRunningProcess(pKernal);
+
     }
-    //the running processes is not init Process
-    helper_removeFromAllProcesses(pKernal->allProcesses,pKernal->runningProcess->PID);
-    pKernal->runningProcess = NULL;
-    scheduler_pickNextRunningProcess(pKernal);
+    
 }
 //check to see if there are any processes on any of the ready queues
     // if all the ready queues are empty

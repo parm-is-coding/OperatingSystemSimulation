@@ -76,5 +76,7 @@ void scheduler_pickNextRunningProcess(OperatingSystem* pKernal){
             schedule(pKernal,High);
         }
     }
-    printf("Next running Process will be PID:%d\n\n",pKernal->runningProcess->PID);
+    if(pKernal->initProcessIsAlive){
+        printf("Next running Process will be PID:%d\n\n",pKernal->runningProcess->PID);
+    }
 }

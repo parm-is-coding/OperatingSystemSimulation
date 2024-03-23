@@ -35,7 +35,7 @@ The program runs in a loop until the initial process is terminated. During each 
 ProcInfo
 TotalInfo
 Kernal
-Quantum 
+Quantum (Bug RoundRobin not scheduling properly)
 # In Progress
 
  # Todo
