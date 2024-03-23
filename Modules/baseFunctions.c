@@ -54,16 +54,7 @@ void Kill(OperatingSystem* pKernal){
 
 }
 void Exit(OperatingSystem* pKernal){
-    if(pKernal->runningProcess == &pKernal->initProcess){
-        if(pKernal->allProcesses->count == 0){
-            printf("Removing initProcesses\nEnding Simulation");
-            pKernal->initProcessIsAlive = false;
-            
-
-        }else{
-
-        }
-    }
+   
 }
 void Quantum(){}
 void Proc_Info(){}
