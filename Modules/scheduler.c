@@ -21,10 +21,7 @@ void scheduler_runRunningProcess(OperatingSystem* pKernal){
     pKernal->numCycles++;
 }
 
-    static void removeFromAllProcesses(List* pAllProcesses,int PID){
-        List_search(pAllProcesses,helper_cmpfunc,&PID);
-        List_remove(pAllProcesses);
-    } 
+     
 //check to see if the running process is init or has time value of 0 or needs to be rescheduled on appropriate queue 
 void scheduler_returnRunningToReady(OperatingSystem* pKernal){
     pKernal->runningProcess->state = Ready;
@@ -32,7 +29,7 @@ void scheduler_returnRunningToReady(OperatingSystem* pKernal){
         //do nothing
     }else if(pKernal->runningProcess->time == 0){
         //we need to remove a completed process
-        removeFromAllProcesses(pKernal->allProcesses,pKernal->runningProcess->PID);
+        helper_removeFromAllProcesses(pKernal->allProcesses,pKernal->runningProcess->PID);
         pKernal->runningProcess = NULL;
     }else{
         //reschedule the running process on the appropriate ready queue

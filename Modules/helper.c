@@ -18,3 +18,7 @@ bool helper_cmpfunc(void* pItem,void* pArg ){
         int* pPID = pArg;
         return pPcbItem->PID == *(pPID);
 }
+void helper_removeFromAllProcesses(List* pAllProcesses,int PID){
+        List_search(pAllProcesses,helper_cmpfunc,&PID);
+        List_remove(pAllProcesses);
+}

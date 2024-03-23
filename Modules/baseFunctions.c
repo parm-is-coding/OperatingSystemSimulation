@@ -45,7 +45,22 @@ void Kill(OperatingSystem* pKernal){
 }
 void Exit(OperatingSystem* pKernal){
     printf("Exit command executed\n");
+    //Running Process is Init
+    if(pKernal->runningProcess->PID == 0){
+        //Init Process is the only Process in the System
+        if(pKernal->allProcesses->count == 0){
+            printf("Removing initProcesses\nEnding Simulation\n");
+            pKernal->initProcessIsAlive = false;
+            
 
+        }else{
+            printf("Failure: Init Process is not Alone\n");
+        }
+    }
+    //the running processes is not init Process
+    helper_removeFromAllProcesses(pKernal->allProcesses,pKernal->runningProcess->PID);
+    pKernal->runningProcess = NULL;
+    scheduler_pickNextRunningProcess(pKernal);
 }
 //check to see if there are any processes on any of the ready queues
     // if all the ready queues are empty
