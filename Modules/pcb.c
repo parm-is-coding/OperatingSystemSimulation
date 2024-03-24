@@ -61,7 +61,6 @@ void pcb_printInfo(ProcessControlBlock* pPCB){
 
 void pcb_Constructor(ProcessControlBlock* pPCB,int priority){
     pPCB->PID = nextPID++;
-    pPCB->messages = "";
     pPCB->priority = priority;
     pPCB->time = 100;
     pPCB->state = Ready;

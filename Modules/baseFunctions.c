@@ -7,6 +7,7 @@
 #include "../HeaderFiles/semaphore.h"
 #include "../HeaderFiles/helper.h"
 #include <stdio.h>
+#include <string.h>
 #include <stdbool.h>
 #include <stdlib.h>
 
@@ -36,8 +37,22 @@ void Create(OperatingSystem* pKernal){
         printf("Failure: Invalid Priority\n");
     }
 }
+
 void Fork(OperatingSystem* pKernal){
     printf("Fork command executed\n");
+    if(pKernal->runningProcess->PID == 0){
+        printf("Failure: Cannot Fork init Process\n");
+    }else{
+        ProcessControlBlock* pPCB = malloc(sizeof(ProcessControlBlock));
+        pcb_Constructor(pPCB,pKernal->runningProcess->priority);
+        strncpy(pPCB->messages,pKernal->runningProcess->messages,MAXMESSAGESIZE);
+        printf("Works\n");
+        pPCB->time = pKernal->runningProcess->time;
+        pPCB->state = Ready;
+        List_append(pKernal->allProcesses,pPCB);
+        List_prepend(pKernal->readyQueues[pPCB->priority],pPCB);
+        printf("Success: Fork of ProcessID: %d\n",pPCB->PID);
+    }
 }
 
 void Kill(OperatingSystem* pKernal){

@@ -1,6 +1,6 @@
 #ifndef PCB_H
 #define PCB_H
-
+#define MAXMESSAGESIZE 50
 typedef struct {
     int PID;
     int time;
@@ -17,7 +17,7 @@ typedef struct {
         Low = 2,
         initPri = 3
     } priority;
-    char* messages;
+    char messages[MAXMESSAGESIZE];
 } ProcessControlBlock;
 
 //Prints the contents of a processcontrolblock
