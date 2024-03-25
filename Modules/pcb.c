@@ -25,11 +25,11 @@ void pcb_printInfo(ProcessControlBlock* pPCB){
     case Blocked:
         state = "Blocked";
         break;
-    case WaitingReceiver:
-        state = "WaitingReceiver";
+    case WaitingReply:
+        state = "WaitingReply";
         break;
-    case WaitingSender:
-        state = "WaitingSender";
+    case WaitingMessage:
+        state = "WaitingMessage";
         break;
     default:
         printf("ERROR THIS IN pcb_printInfo");
@@ -61,7 +61,7 @@ void pcb_printInfo(ProcessControlBlock* pPCB){
 
 void pcb_Constructor(ProcessControlBlock* pPCB,int priority){
     pPCB->PID = nextPID++;
-    pPCB->messages = "";
+    pPCB->messages[0] = '\0';
     pPCB->priority = priority;
     pPCB->time = 100;
     pPCB->state = Ready;

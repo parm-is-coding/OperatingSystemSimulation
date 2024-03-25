@@ -1,6 +1,8 @@
 #ifndef PCB_H
 #define PCB_H
 
+#define MAX_LEN 40
+
 typedef struct {
     int PID;
     int time;
@@ -8,8 +10,8 @@ typedef struct {
         Running = 0,
         Ready = 1,
         Blocked = 2,
-        WaitingSender = 3,
-        WaitingReceiver = 4
+        WaitingReply = 3,
+        WaitingMessage = 4
     } state;
     enum Priority{
         High = 0,
@@ -17,7 +19,17 @@ typedef struct {
         Low = 2,
         initPri = 3
     } priority;
-    char* messages;
+
+    char messages[MAX_LEN];
+    char proc_message[MAX_LEN]; //for returning messages
+    enum DisplayProc { //checks if we have anything to show
+        ReceivedMessage = 0,
+        ReceivedReply = 1,
+        NothingToShow = 2
+    } displayProc;
+    char messageToSend[MAX_LEN]; //buffer if receiver is not ready
+
+    ProcessControlBlock* waitingSender;
 } ProcessControlBlock;
 
 //Prints the contents of a processcontrolblock
