@@ -111,7 +111,7 @@ void Kill(OperatingSystem* pKernal){
             printf("Sucess: Removing PCB %d\n",processToKill->PID);
             helper_removeFromAllProcesses(pKernal->allProcesses,processToKill->PID);
         }
-        
+    } 
 }
 void Exit(OperatingSystem* pKernal){
     printf("Exit command executed\n");
