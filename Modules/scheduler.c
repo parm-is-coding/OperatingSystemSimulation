@@ -36,7 +36,7 @@ void scheduler_returnRunningToReady(OperatingSystem* pKernal){
 }
 
     static bool allReadyQueuesAreEmpty(OperatingSystem* pKernal){
-        if(pKernal->readyQueues[0]->count == 0 & pKernal->readyQueues[1]->count == 0 & pKernal->readyQueues[2]->count == 0 ){
+        if(pKernal->readyQueues[0]->count == 0 && pKernal->readyQueues[1]->count == 0 && pKernal->readyQueues[2]->count == 0 ){
             return true;
         }else{
             return false;

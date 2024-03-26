@@ -78,10 +78,11 @@ void Kill(OperatingSystem* pKernal){
             printf("Failure: invalid PID to kill");
         }else{
             //remove PCB from stateQueue
+            List* readyQueue;
             switch(processToKill->state){
                 case Ready:
                 //Ready Queue case
-                List* readyQueue = pKernal->readyQueues[processToKill->priority]; 
+                readyQueue = pKernal->readyQueues[processToKill->priority]; 
                 List_first(readyQueue);
                 while(processToKill->PID != ((ProcessControlBlock*)List_curr(readyQueue))->PID){
                     List_next(readyQueue);
@@ -89,22 +90,17 @@ void Kill(OperatingSystem* pKernal){
                 printf("Killed: PID %d\n",processToKill->PID);
                 List_remove(readyQueue);
                 break;
-                case Blocked:
-                //Semaphore case
-                //Problem how do i know what 
-                List* BlockList = pKernal->semaphors[processToKill->SemID]->queue; 
-                List_first(BlockList);
-                while(processToKill->PID != ((ProcessControlBlock*)List_curr(BlockList))->PID){
-                    List_next(BlockList);
-                }
-                printf("Killed: PID %d",processToKill->PID);
-                List_remove(readyQueue);
+                case Blocked: 
+                printf("Failure: Cannot Kill a blocked Process\n");
                 break;
                 case WaitingSender:
-                //ipc case
+                printf("Failure: Cannot Kill a waiting Processs\n");
                 break;
                 case WaitingReceiver:
-                //ipc case
+                printf("Failure: Cannot Kill a waiting Processs\n");
+                break;
+                case Running:
+                Exit(pKernal);
                 break;
             }
             //remove PCB from allprocesses

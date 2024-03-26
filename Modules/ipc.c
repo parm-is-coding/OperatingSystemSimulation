@@ -26,10 +26,10 @@ static int getPIDFromUser(){
     return PID;
 }
 
-//TO DO -> consolidate
-static void List_Trade(ProcessControlBlock* pcb, List* old, List* new) {
+// //TO DO -> consolidate
+// static void List_Trade(ProcessControlBlock* pcb, List* old, List* new) {
     
-}
+// }
 
 //moves back on ready queue and changes state
 static void UnblockProcess(ProcessControlBlock* pcb, List* blocked, OperatingSystem* pKernal){
