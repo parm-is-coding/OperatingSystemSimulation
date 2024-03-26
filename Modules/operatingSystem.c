@@ -28,6 +28,9 @@ void operatingSystem_Constructor(OperatingSystem* pOperatingSystem){
     pOperatingSystem->readyQueues[1] = List_create();
     pOperatingSystem->readyQueues[2] = List_create();
     pOperatingSystem->numCycles = 0;
+    for(int i = 0; i < 5;i++){
+        pOperatingSystem->semaphors[i] = NULL;
+    }
     //Probably Change this when doing IPC
     
 }

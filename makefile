@@ -11,3 +11,5 @@ git:
 	git add *
 	git commit
 	git push
+grind:
+	valgrind ./simulation
