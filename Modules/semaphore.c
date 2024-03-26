@@ -5,11 +5,23 @@
 #include "../HeaderFiles/pcb.h"
 #include "../HeaderFiles/scheduler.h"
 #include "../HeaderFiles/semaphore.h"
+#include "../HeaderFiles/helper.h"
 #include <stdio.h>
 #include <stdbool.h>
+#include <stdlib.h>
 
 void New_Sem(OperatingSystem* pKernal){
     printf("New_Sem command executed\n");
+    int id, initVal;
+    scanf("%d %d",&id,&initVal);
+    helper_clearStdinBuffer();
+    if(id < 0 || id > 4){
+        printf("Failure: invalid semaphore id\n");
+    }else{
+        pKernal->semaphors[id] = (Semaphore*)malloc(sizeof(Semaphore));
+        printf("Semaphore %d Initialized \n",id)
+    }
+
     
 }
 void Sem_P(OperatingSystem* pKernal){
