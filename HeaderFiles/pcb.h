@@ -17,6 +17,16 @@ typedef struct {
         initPri = 3
     } priority;
     char messages[MAXMESSAGESIZE];
+     // char proc_message[MAXMESSAGESIZE]; //for returning messages
+    enum DisplayProc { //checks if we have anything to show
+        NothingToShow = 0,
+        ReceivedMessage = 1,
+        ReceivedReply = 2
+    } displayProc;
+    int sourcePID;
+    char messageToSend[MAXMESSAGESIZE]; //buffer if receiver is not ready
+
+    ProcessControlBlock* waitingSender;
 } ProcessControlBlock;
 
 //Prints the contents of a processcontrolblock
