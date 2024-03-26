@@ -21,10 +21,10 @@ void scheduler_runRunningProcess(OperatingSystem* pKernal){
         if (pPCB->displayProc == ReceivedMessage) {
             printf("message received from %d: %s\n", pPCB->sourcePID, pPCB->messages);
             //reset:
-            pPCB->displayProc == NothingToShow;
+            pPCB->displayProc = NothingToShow;
         } else if (pPCB->displayProc == ReceivedReply) {
             printf("reply received from %d: %s\n", pPCB->sourcePID, pPCB->messages);
-            pPCB->displayProc == NothingToShow;
+            pPCB->displayProc = NothingToShow;
         }
     }
     pKernal->numCycles++;
@@ -46,7 +46,7 @@ void scheduler_returnRunningToReady(OperatingSystem* pKernal){
 }
 
     static bool allReadyQueuesAreEmpty(OperatingSystem* pKernal){
-        if(pKernal->readyQueues[0]->count == 0 & pKernal->readyQueues[1]->count == 0 & pKernal->readyQueues[2]->count == 0 ){
+        if(pKernal->readyQueues[0]->count == 0 && pKernal->readyQueues[1]->count == 0 && pKernal->readyQueues[2]->count == 0 ){
             return true;
         }else{
             return false;

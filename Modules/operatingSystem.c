@@ -16,7 +16,6 @@ void operatingSystem_Constructor(OperatingSystem* pOperatingSystem){
     pOperatingSystem->initProcess.PID = 0;
     pOperatingSystem->initProcess.priority = initPri;
     pOperatingSystem->initProcess.state = Running;
-    pOperatingSystem->initProcess.messages;
 
     pOperatingSystem->initProcessIsAlive = true;
     //initialize the first running Process as initProcess
