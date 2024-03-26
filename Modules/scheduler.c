@@ -13,11 +13,22 @@
 void scheduler_runRunningProcess(OperatingSystem* pKernal){
     ProcessControlBlock* pPCB = pKernal->runningProcess;
     if(pPCB->PID == pKernal->initProcess.PID){
-        printf("\nPID: %d Running InitProcess Cycle: %d\n",pPCB->PID,pKernal->numCycles);
+        printf("\nPID: %d Running InitProcess Cycle: %d\n", pPCB->PID, pKernal->numCycles);
     }else{
-        pPCB->time -= 50;
-        printf("PID: %d Running %d Time Remaining Cycle: %d\n",pPCB->PID,pPCB->time,pKernal->numCycles);
+        // pPCB->time -= 50;
+        printf("PID: %d is now running", pPCB->PID);
+
+        //dont have to worry about both at the same time -> proc will run before you can call rec
+        if (pPCB->displayProc == ReceivedMessage) {
+            printf("message received from %d: %s\n", pPCB->receivedPID, pPCB->message);
+            //reset:
+            pPCB->displayProc == NothingToShow;
+        } else if (pPCB->displayProc == ReceivedReply) {
+            printf("reply received from %d: %s\n", pPCB->receivedPID, pPCB->message);
+            pPCB->displayProc == NothingToShow;
+        }
     }
+
     pKernal->numCycles++;
 }
 
@@ -27,17 +38,17 @@ void scheduler_returnRunningToReady(OperatingSystem* pKernal){
     pKernal->runningProcess->state = Ready;
     if(pKernal->runningProcess->priority == initPri){
         //do nothing
-    }else if(pKernal->runningProcess->time == 0){
-        //we need to remove a completed process
-        helper_removeFromAllProcesses(pKernal->allProcesses,pKernal->runningProcess->PID);
-        pKernal->runningProcess = NULL;
+    // }else if(pKernal->runningProcess->time == 0){
+    //     //we need to remove a completed process
+    //     helper_removeFromAllProcesses(pKernal->allProcesses,pKernal->runningProcess->PID);
+    //     pKernal->runningProcess = NULL;
     }else{
         //reschedule the running process on the appropriate ready queue
         
-        List_prepend(pKernal->readyQueues[pKernal->runningProcess->priority],pKernal->runningProcess);    
+        List_prepend(pKernal->readyQueues[pKernal->runningProcess->priority], pKernal->runningProcess);    
     }
         // set running process to nullptr
-        pKernal->runningProcess = NULL;
+    pKernal->runningProcess = NULL;
 }
 
     static bool allReadyQueuesAreEmpty(OperatingSystem* pKernal){

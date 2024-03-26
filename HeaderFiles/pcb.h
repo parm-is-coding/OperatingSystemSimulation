@@ -5,7 +5,6 @@
 
 typedef struct {
     int PID;
-    int time;
     enum State {
         Running = 0,
         Ready = 1,
@@ -20,13 +19,14 @@ typedef struct {
         initPri = 3
     } priority;
 
-    char messages[MAX_LEN];
-    char proc_message[MAX_LEN]; //for returning messages
+    char message[MAX_LEN];
+    // char proc_message[MAX_LEN]; //for returning messages
     enum DisplayProc { //checks if we have anything to show
-        ReceivedMessage = 0,
-        ReceivedReply = 1,
-        NothingToShow = 2
+        NothingToShow = 0,
+        ReceivedMessage = 1,
+        ReceivedReply = 2
     } displayProc;
+    int sourcePID;
     char messageToSend[MAX_LEN]; //buffer if receiver is not ready
 
     ProcessControlBlock* waitingSender;
