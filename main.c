@@ -60,7 +60,7 @@ int main() {
     char command;
     while(pKernal->initProcessIsAlive){
         //get user command
-        printf("Enter a command: ");
+        printf("Process PID:%d is running, enter a command: ", pKernal->runningProcess->PID);
         scanf("%c",&command);
         helper_clearStdinBuffer();
         operatingSystem_runCommand(command,pKernal);

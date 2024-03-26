@@ -63,6 +63,9 @@ void pcb_Constructor(ProcessControlBlock* pPCB,int priority){
     pPCB->PID = nextPID++;
     pPCB->priority = priority;
     pPCB->state = Ready;
+    pPCB->displayProc = NothingToShow;
+    pPCB->sourcePID = 0;
+    pPCB->waitingSender = NULL;
 }
 void pcb_Destructor(ProcessControlBlock* pPCB){
     free(pPCB);
