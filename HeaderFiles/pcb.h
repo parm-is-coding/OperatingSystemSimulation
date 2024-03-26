@@ -1,7 +1,10 @@
 #ifndef PCB_H
 #define PCB_H
 #define MAXMESSAGESIZE 50
-typedef struct {
+
+typedef struct ProcessControlBlock_s ProcessControlBlock;
+
+ struct ProcessControlBlock_s {
     int PID;
     enum State {
         Running = 0,
@@ -27,7 +30,7 @@ typedef struct {
     char messageToSend[MAXMESSAGESIZE]; //buffer if receiver is not ready
 
     ProcessControlBlock* waitingSender;
-} ProcessControlBlock;
+}; 
 
 //Prints the contents of a processcontrolblock
 void pcb_printInfo(ProcessControlBlock* pPCB);
