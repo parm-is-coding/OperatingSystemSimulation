@@ -6,3 +6,7 @@ build:
 	gcc -g -I HeaderFiles main.c $(Modules) list.o -o simulation
 run: build
 	./simulation
+
+git:
+	git add *
+	git commit
