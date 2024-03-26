@@ -92,7 +92,7 @@ void Send(OperatingSystem* pKernal){
     if (target == NULL) {
         printf("Failure, PID does not exist\n");
         return;
-    } else if (!(target->state == Ready || target->state == Running)) {
+    } else if (!(target->state == Ready || target->state == Running || target->state == WaitingReceiver)) {
         //can only send to running/ready processes
         printf("Failure, process %d cannot receive messages right now\n", PID);
         return;
