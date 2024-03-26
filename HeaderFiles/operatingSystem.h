@@ -21,7 +21,7 @@ typedef struct {
     // initProcess
     ProcessControlBlock initProcess; 
     //semphors array[5]
-    Semaphore semaphors[5];
+    Semaphore* semaphors[5];
     //the condition in which the simulation will continue to run
     bool initProcessIsAlive;
     int numCycles;
