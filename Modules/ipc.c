@@ -19,7 +19,7 @@ static void getInputMessage(char* buffer){
 
 static int getPIDFromUser(){
     int PID;
-    printf("Enter PID for target process:");
+    printf("Enter PID for target process: ");
     scanf("%d",&PID);
     helper_clearStdinBuffer();
 
@@ -80,7 +80,7 @@ void Send(OperatingSystem* pKernal){
 
     //cant send to self
     if (PID == pKernal->runningProcess->PID) {
-        printf("can't send to self");
+        printf("can't send to self\n");
         return;
     }
 
@@ -94,10 +94,10 @@ void Send(OperatingSystem* pKernal){
         return;
     } else if (!(target->state == Ready || target->state == Running)) {
         //can only send to running/ready processes
-        printf("Failure, process %d cannot receive messages right now", PID);
+        printf("Failure, process %d cannot receive messages right now\n", PID);
         return;
     } else if (target->waitingSender != NULL) {
-        printf("Failure, process %d is already trying to reach process %d", target->waitingSender->PID, target->PID);
+        printf("Failure, process %d is already trying to reach process %d\n", target->waitingSender->PID, target->PID);
         return;
     }
 
@@ -142,6 +142,9 @@ void Receive(OperatingSystem* pKernal){
 
         printf("Received message from %d:\n%s", sender->PID, current->messages); //no need to update message Proc
 
+        //unlink sender from reciever
+        current->waitingSender = NULL;
+
         //unblocks in reply, not here
         return;
     }
@@ -173,7 +176,7 @@ void Reply(OperatingSystem* pKernal){
         printf("Failure, PID does not exist\n");
         return;
     } else if (sender->state != WaitingSender) {
-        printf("Failure, process %d is not waiting for a reply", PID);
+        printf("Failure, process %d is not waiting for a reply\n", PID);
         return;
     }
 
@@ -186,7 +189,5 @@ void Reply(OperatingSystem* pKernal){
     sender->sourcePID = current->PID;
     sender->displayProc = ReceivedReply;
 
-
-    
     printf("Reply command executed\n");
 }

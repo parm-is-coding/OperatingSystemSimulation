@@ -16,16 +16,6 @@ void scheduler_runRunningProcess(OperatingSystem* pKernal){
         printf("\nPID: %d Running InitProcess Cycle: %d\n",pPCB->PID,pKernal->numCycles);
     }else{
         printf("PID: %d Running Cycle: %d\n",pPCB->PID,pKernal->numCycles);
-
-        // //dont have to worry about both at the same time -> proc will run before you can call rec
-        if (pPCB->displayProc == ReceivedMessage) {
-            printf("message received from %d: %s\n", pPCB->sourcePID, pPCB->messages);
-            //reset:
-            pPCB->displayProc == NothingToShow;
-        } else if (pPCB->displayProc == ReceivedReply) {
-            printf("reply received from %d: %s\n", pPCB->sourcePID, pPCB->messages);
-            pPCB->displayProc == NothingToShow;
-        }
     }
     pKernal->numCycles++;
 }

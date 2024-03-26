@@ -59,12 +59,26 @@ int main() {
 
     char command;
     while(pKernal->initProcessIsAlive){
+        ProcessControlBlock* pPCB = pKernal->runningProcess;
+        printf("Process PID:%d is running, ", pPCB->PID);
+
+        // //dont have to worry about both at the same time -> proc will run before you can call rec
+        if (pPCB->displayProc == ReceivedMessage) {
+            printf("message received from %d: %s\n", pPCB->sourcePID, pPCB->messages);
+            //reset:
+            pPCB->displayProc == NothingToShow;
+        } else if (pPCB->displayProc == ReceivedReply) {
+            printf("reply received from %d: %s\n", pPCB->sourcePID, pPCB->messages);
+            pPCB->displayProc == NothingToShow;
+        }
+
         //get user command
-        printf("Process PID:%d is running, enter a command: ", pKernal->runningProcess->PID);
-        scanf("%c",&command);
+        printf("enter a command: ");
+        scanf("%c", &command);
         helper_clearStdinBuffer();
-        operatingSystem_runCommand(command,pKernal);
+        operatingSystem_runCommand(command, pKernal);
     }
+
     operatingSystem_Destructor(pKernal);
     printf("Simulation is Over");
     return 0;
