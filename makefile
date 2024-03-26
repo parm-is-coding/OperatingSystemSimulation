@@ -13,3 +13,6 @@ git:
 	git push
 grind:
 	valgrind ./simulation
+
+clean:
+	rm simulation
