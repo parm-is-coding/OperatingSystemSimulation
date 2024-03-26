@@ -52,10 +52,4 @@ Kernal
 Quantum (Bug RoundRobin not scheduling properly)
 # In Progress
 
- # Todo
- -Exit Parm (Easy)
- -Fork(Easy Medium)?
- -Kill Parm (Hard)
-
- -Semaphores (Medium)
- -IPC (Hard)
+ 
