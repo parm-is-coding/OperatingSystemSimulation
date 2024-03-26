@@ -44,6 +44,12 @@ void operatingSystem_Destructor(OperatingSystem* pKernal){
     List_free(pKernal->readyQueues[1],freefn);
     List_free(pKernal->readyQueues[2],freefn);
     List_free(pKernal->waitingReply,freefn);
+    for(int i =0; i < 5;i++){
+        if(pKernal->semaphors[i] != NULL){
+            List_free(pKernal->semaphors[i]->queue,freefn);
+            free(pKernal->semaphors[i]);
+        }
+    }
     free(pKernal);
 }
 
