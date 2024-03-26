@@ -13,13 +13,14 @@
 void New_Sem(OperatingSystem* pKernal){
     printf("New_Sem command executed\n");
     int id, initVal;
+    printf("Enter semaphore id value 0-4 and initial semaphore value\n");
     scanf("%d %d",&id,&initVal);
     helper_clearStdinBuffer();
     if(id < 0 || id > 4){
         printf("Failure: invalid semaphore id\n");
     }else{
         pKernal->semaphors[id] = (Semaphore*)malloc(sizeof(Semaphore));
-        printf("Semaphore %d Initialized \n",id)
+        printf("Semaphore %d Initialized \n",id);
     }
 
     
