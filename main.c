@@ -66,10 +66,10 @@ int main() {
         if (pPCB->displayProc == ReceivedMessage) {
             printf("message received from %d: %s\n", pPCB->sourcePID, pPCB->messages);
             //reset:
-            pPCB->displayProc == NothingToShow;
+            pPCB->displayProc = NothingToShow;
         } else if (pPCB->displayProc == ReceivedReply) {
             printf("reply received from %d: %s\n", pPCB->sourcePID, pPCB->messages);
-            pPCB->displayProc == NothingToShow;
+            pPCB->displayProc = NothingToShow;
         }
 
         //get user command
