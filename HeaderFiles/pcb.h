@@ -30,6 +30,8 @@ typedef struct ProcessControlBlock_s ProcessControlBlock;
     char messageToSend[MAXMESSAGESIZE]; //buffer if receiver is not ready
 
     ProcessControlBlock* waitingSender;
+    //Semaphores
+    int SemID;
 }; 
 
 //Prints the contents of a processcontrolblock
