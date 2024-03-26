@@ -52,17 +52,28 @@ void Sem_P(OperatingSystem* pKernal){
         }
     }
 }
+    static bool noProcessesAreBlocked(OperatingSystem* pKernal, int id){
+        List* sem = pKernal->semaphors[id]->queue;
+        if (List_count(sem) == 0) {
+            return true;
+        }
+        return false;
+    }
+
 void Sem_V(OperatingSystem* pKernal){
     printf("Sem_V command executed\n");
-     printf("Enter Semaphore ID:");
+    printf("Enter Semaphore ID:");
     int id;
     scanf("%d",&id);
     helper_clearStdinBuffer();
-    if(0<id || id > 4){
+    if(0>id || id > 4){
         printf("Failure: invalid Semaphore ID\n");
     }else if(pKernal->semaphors[id] == NULL){
         printf("Failure: uninitialized Semaphore ID\n");
-    }else{
+    }else if(noProcessesAreBlocked(pKernal, id)){
+        printf("Failure: no processes are blocked\n");
+    }
+    else{
         pKernal->semaphors[id]->Value++;
         if(pKernal->semaphors[id]->Value <=0){
             ProcessControlBlock* pPCB = List_trim(pKernal->semaphors[id]->queue);
