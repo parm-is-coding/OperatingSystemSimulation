@@ -5,22 +5,58 @@
 #include "../HeaderFiles/pcb.h" //includes MAX_LEN
 #include "../HeaderFiles/scheduler.h"
 #include "../HeaderFiles/semaphore.h"
+#include "../HeaderFiles/helper.h"
 #include <stdio.h>
 #include <stdbool.h>
 
 //static means priv (basically) in C
-static void getInputMessage(char* buffer) {
+static void getInputMessage(char* buffer){
     //PROBLEM: shouldnt overwrite message until receive is called -> use a queue or a temp buffer
     fgets(buffer, MAX_LEN, stdin);
 }
 
-static int getPIDFromUser() {
+static int getPIDFromUser(){
     int PID;
     printf("Enter PID for target process:");
     scanf("%d",&PID);
     helper_clearStdinBuffer();
 
     return PID;
+}
+
+//TO DO -> consolidate
+static void List_Trade(ProcessControlBlock* pcb, List* old, List* new) {
+    
+}
+
+//moves back on ready queue and changes state
+static void UnblockProcess(ProcessControlBlock* pcb, List* blocked, OperatingSystem* pKernal){
+    //update state
+    pcb->state = Ready;
+
+    //remove current from blocked queue
+    int PID = pcb->PID;
+    List_first(blocked); //search from beginning
+    List_search(blocked, helper_cmpfunc, &PID); //current is pointed to match, assuming blocked queue is valid
+    List_remove(blocked); //removes current, does not free mem
+
+    //add current to ready
+    List* ready = pKernal->readyQueues[pcb->priority];
+    List_append(ready, pcb);
+}
+
+//remove process from ready queue to blocked, does not change state
+static void BlockProcess(ProcessControlBlock* pcb, List* blocked, OperatingSystem* pKernal) {
+    //remove current from ready queue
+    int PID = pcb->PID;
+    List* ready = pKernal->readyQueues[pcb->priority];
+
+    List_first(ready); //search from beginning
+    List_search(ready, helper_cmpfunc, &PID); //current is pointed to match, assuming ready is valid
+    List_remove(ready); //removes current
+
+    //add to blocked queue
+    List_append(blocked, pcb);
 }
 
 void Send(OperatingSystem* pKernal){
@@ -47,7 +83,7 @@ void Send(OperatingSystem* pKernal){
     //success:
     //check if target is waiting for message
     if (target->state == WaitingMessage) {
-        UnblockProcess(target, pKernal->WaitingSend); //moves target back on the ready queue, changes state as well
+        UnblockProcess(target, pKernal->WaitingSend, pKernal); //moves target back on the ready queue, changes state as well
         
         //when unblocking we lead to proc message
         target->sourcePID = current->PID; //tells the target who sent them a message    
@@ -57,7 +93,7 @@ void Send(OperatingSystem* pKernal){
         
         //writes the message to the send buffer
         getInputMessage(current->messageToSend);
-        BlockProcess(current, pKernal->waitingReply); //waits for a reply
+        BlockProcess(current, pKernal->waitingReply, pKernal); //waits for a reply
         //change state here
         current->state = WaitingReply;
 
@@ -84,7 +120,7 @@ void Receive(OperatingSystem* pKernal){
     }
     
     //else (block current):
-    BlockProcess(current, pKernal->WaitingSend);
+    BlockProcess(current, pKernal->WaitingSend, pKernal);
 
     //change state here
     current->state = WaitingMessage;
@@ -100,7 +136,7 @@ void Reply(OperatingSystem* pKernal){
     helper_clearStdinBuffer();
 
     //find PID on waiting reply
-    ProcessControlBlock* sender = operatingSystem_findPID(PID);
+    ProcessControlBlock* sender = operatingSystem_findPID(pKernal, PID);
     ProcessControlBlock* current = pKernal->runningProcess;
     //trivially, sender is blocked
     
@@ -113,7 +149,7 @@ void Reply(OperatingSystem* pKernal){
     }
 
     //else (reply and unblock to the sender):
-    UnblockProcess(sender, pKernal->waitingReply); //changes state as well
+    UnblockProcess(sender, pKernal->waitingReply, pKernal); //changes state as well
     //when unblocking we lead to proc message
     sender->sourcePID = current->PID;
     sender->displayProc = ReceivedReply;

@@ -56,14 +56,13 @@ void pcb_printInfo(ProcessControlBlock* pPCB){
         exit(1);
         break;
     }
-    printf("\nProcessID: %d\nTime to execute: %d\nState: %s\nPriority: %s\nMessages: %s\n\n",pPCB->PID,pPCB->time,state,priority,pPCB->messages);    
+    printf("\nProcessID: %d\nTime to execute: %d\nState: %s\nPriority: %s\nMessages: %s\n\n",pPCB->PID,state,priority,pPCB->message);    
 }
 
 void pcb_Constructor(ProcessControlBlock* pPCB,int priority){
     pPCB->PID = nextPID++;
     pPCB->message[0] = '\0';
     pPCB->priority = priority;
-    pPCB->time = 100;
     pPCB->state = Ready;
 }
 void pcb_Destructor(ProcessControlBlock* pPCB){

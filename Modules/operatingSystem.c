@@ -56,6 +56,7 @@ ProcessControlBlock* operatingSystem_findPID(OperatingSystem* pKernal,int PID){
     List_first(pKernal->allProcesses);
     return pPCB;
 }
+
 void operatingSystem_runCommand(char command,OperatingSystem* pKernal) {
     switch (command){
         case 'C':
