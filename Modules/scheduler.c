@@ -15,8 +15,7 @@ void scheduler_runRunningProcess(OperatingSystem* pKernal){
     if(pPCB->PID == pKernal->initProcess.PID){
         printf("\nPID: %d Running InitProcess Cycle: %d\n",pPCB->PID,pKernal->numCycles);
     }else{
-        pPCB->time -= 50;
-        printf("PID: %d Running %d Time Remaining Cycle: %d\n",pPCB->PID,pPCB->time,pKernal->numCycles);
+        printf("PID: %d Running Cycle: %d\n",pPCB->PID,pKernal->numCycles);
     }
     pKernal->numCycles++;
 }
@@ -27,10 +26,6 @@ void scheduler_returnRunningToReady(OperatingSystem* pKernal){
     pKernal->runningProcess->state = Ready;
     if(pKernal->runningProcess->priority == initPri){
         //do nothing
-    }else if(pKernal->runningProcess->time == 0){
-        //we need to remove a completed process
-        helper_removeFromAllProcesses(pKernal->allProcesses,pKernal->runningProcess->PID);
-        pKernal->runningProcess = NULL;
     }else{
         //reschedule the running process on the appropriate ready queue
         

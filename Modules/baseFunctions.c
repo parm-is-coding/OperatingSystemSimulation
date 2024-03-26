@@ -46,8 +46,6 @@ void Fork(OperatingSystem* pKernal){
         ProcessControlBlock* pPCB = malloc(sizeof(ProcessControlBlock));
         pcb_Constructor(pPCB,pKernal->runningProcess->priority);
         strncpy(pPCB->messages,pKernal->runningProcess->messages,MAXMESSAGESIZE);
-        printf("Works\n");
-        pPCB->time = pKernal->runningProcess->time;
         pPCB->state = Ready;
         List_append(pKernal->allProcesses,pPCB);
         List_prepend(pKernal->readyQueues[pPCB->priority],pPCB);

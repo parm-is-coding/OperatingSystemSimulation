@@ -21,13 +21,54 @@ void New_Sem(OperatingSystem* pKernal){
     }else{
         pKernal->semaphors[id] = (Semaphore*)malloc(sizeof(Semaphore));
         printf("Semaphore %d Initialized \n",id);
+        pKernal->semaphors[id]->queue = List_create();
     }
 
     
 }
 void Sem_P(OperatingSystem* pKernal){
     printf("Sem_P command executed\n");
+     printf("Enter Semaphore ID:");
+    int id;
+    scanf("%d",&id);
+    helper_clearStdinBuffer();
+    if(0<id || id > 4){
+        printf("Failure: invalid Semaphore ID\n");
+    }else if(pKernal->semaphors[id] == NULL){
+        printf("Failure: uninitialized Semaphore ID\n");
+    }else if(pKernal->runningProcess->PID == 0){
+        printf("Failure: cannot Block initProcess\n");
+    }else{
+        pKernal->semaphors[id]->Value--;
+        if(pKernal->semaphors[id]->Value < 0){
+            printf("PID: %d has been blocked\n",pKernal->runningProcess->PID);
+            pKernal->runningProcess->state = Blocked;
+            //add running process to semaphore.blockedlist
+            List_append(pKernal->semaphors[id]->queue,pKernal->runningProcess); 
+            pKernal->runningProcess = NULL;
+            scheduler_pickNextRunningProcess(pKernal);
+        }else{
+            printf("PID: %d proceeded without being blocked\n",pKernal->runningProcess->PID);
+        }
+    }
 }
 void Sem_V(OperatingSystem* pKernal){
     printf("Sem_V command executed\n");
+     printf("Enter Semaphore ID:");
+    int id;
+    scanf("%d",&id);
+    helper_clearStdinBuffer();
+    if(0<id || id > 4){
+        printf("Failure: invalid Semaphore ID\n");
+    }else if(pKernal->semaphors[id] == NULL){
+        printf("Failure: uninitialized Semaphore ID\n");
+    }else{
+        pKernal->semaphors[id]->Value++;
+        if(pKernal->semaphors[id]->Value <=0){
+            ProcessControlBlock* pPCB = List_trim(pKernal->semaphors[id]->queue);
+            printf("PID: %d Woken up\n",pPCB->PID);
+            List_prepend(pKernal->readyQueues[pPCB->priority],pPCB);
+        }
+
+    }
 }

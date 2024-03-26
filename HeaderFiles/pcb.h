@@ -3,7 +3,6 @@
 #define MAXMESSAGESIZE 50
 typedef struct {
     int PID;
-    int time;
     enum State {
         Running = 0,
         Ready = 1,
