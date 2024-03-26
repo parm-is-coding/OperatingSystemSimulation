@@ -42,6 +42,9 @@ The program runs in a loop until the initial process is terminated. During each 
 
 [Provide any assumptions made during the development of the project here]
 
+A process can only have 1 sender waiting at a time
+init process cant call send/receive/reply (if init process is running wont be anyone to receive/reply to anyways)
+
 # Complete
 ProcInfo
 TotalInfo
